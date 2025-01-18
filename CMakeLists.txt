@@ -1,22 +1,14 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.25)
 
-project(monolith VERSION 0.1.0)
+project(
+        PrimitiveWindowsShell
+        VERSION 1.0.0
+        DESCRIPTION "Primitive Windows shell"
+        LANGUAGES C
+)
 
-option(MONOLITH_DEVELOPER "Enable ${PROJECT_NAME} developer mode" OFF)
-option(MONOLITH_BENCHMARK "Enable ${PROJECT_NAME} benchmark module" OFF)
+include(cmake/compile_options.cmake)
+include(cmake/fetch.cmake)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-
-include(cmake/CompileOptions.cmake)
-
-add_subdirectory(source)
-
-if(MONOLITH_DEVELOPER)
-    find_package(GTest REQUIRED)
-    add_subdirectory(test)
-endif()
-    
-if(MONOLITH_BENCHMARK)
-    find_package(GBenchmark REQUIRED)
-    add_subdirectory(benchmark)
-endif()
+add_subdirectory(apps)
+add_subdirectory(src)
